@@ -1,8 +1,16 @@
+/* Use CSS Variables for Colors */
+:root {
+  --background-color: #4e4e4e;
+  --text-color: #f1f1f1;
+  --link-color: #aaa;
+  --highlight-color: yellow;
+}
+
+/* General Styles */
 @font-face {
   font-family: 'fontello';
   src: url('fonts/fontello.eot?60518104');
-  src:
-    url('fonts/fontello.eot?60518104#iefix') format('embedded-opentype'),
+  src: url('fonts/fontello.eot?60518104#iefix') format('embedded-opentype'),
     url('fonts/fontello.woff?60518104') format('woff'),
     url('fonts/fontello.ttf?60518104') format('truetype'),
     url('fonts/fontello.svg?60518104#fontello') format('svg');
@@ -11,28 +19,25 @@
 }
 
 body {
-  background: #4e4e4e;
+  background: var(--background-color);
   overflow: hidden;
 }
 
 .myselect {
-    overflow: visible !important;
+  overflow: visible;
 }
 
 #main {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: 0;
   right: 0;
+  bottom: 0;
+  width: 100%;
   border-radius: 5px;
-  background: #fff;
+  background: var(--text-color)
   overflow: hidden;
-  -webkit-transition: -webkit-transform 0.4s, width 0.2s;
-  -moz-transition: -webkit-transform 0.4s, width 0.2s;
-  transition: -webkit-transform 0.4s, width 0.2s;
-  -moz-box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s, width 0.2s;
 }
 
 #titlebar {
@@ -40,13 +45,11 @@ body {
   min-height: 20px;
   padding: 10px;
   position: relative;
-  color: #4f4f4f;
+  color: var(--text-color);
   font-weight: 100;
   font-family: Georgia, "Times New Roman", Times, serif;
   opacity: 0.5;
   text-align: center;
-  -webkit-transition: opacity 0.5s;
-  -moz-transition: opacity 0.5s;
   transition: opacity 0.5s;
   z-index: 10;
 }
@@ -89,19 +92,21 @@ body {
 #titlebar a:active {
   opacity: 1;
   color: rgba(0, 0, 0, 0.6);
-  -moz-box-shadow: inset 0 0 6px rgba(155, 155, 155, 0.8);
-  -webkit-box-shadow: inset 0 0 6px rgba(155, 155, 155, 0.8);
   box-shadow: inset 0 0 6px rgba(155, 155, 155, 0.8);
 }
 
-#book-title { font-weight: 600; }
-#title-seperator { display: none; }
+#book-title {
+  font-weight: 600;
+}
+
+#title-seperator {
+  display: none;
+}
 
 #viewer {
   width: 80%;
   height: 80%;
   margin: 0 auto;
-  z-index: 2;
   position: relative;
   overflow: hidden;
 }
@@ -110,33 +115,15 @@ body {
   border: none;
 }
 
-#left,
-#prev {
-  left: 40px;
-  padding-right: 80px;
-}
-
-#right,
-#next {
-  right: 40px;
-  padding-left: 80px;
-}
-
 .arrow {
   position: absolute;
   top: 50%;
-  margin-top: -192px;
   font-size: 64px;
   color: #e2e2e2;
   font-family: arial, sans-serif;
   font-weight: bold;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  padding-top: 160px;
-  padding-bottom: 160px;
 }
 
 .arrow:hover {
@@ -152,20 +139,14 @@ body {
   background: #6b6b6b;
   position: absolute;
   top: 0;
-  min-width: 300px;
   width: 25%;
   height: 100%;
-  -webkit-transition: -webkit-transform 0.5s;
-  -moz-transition: -moz-transform 0.5s;
-  transition: -moz-transform 0.5s;
+  transition: transform 0.5s;
   overflow: hidden;
 }
 
 #main.closed {
-  /* left: 300px; */
-  -webkit-transform: translate(300px, 0);
-  -moz-transform: translate(300px, 0);
-  -ms-transform: translate(300px, 0);
+  transform: translateX(300px);
 }
 
 #main.single {
@@ -173,8 +154,7 @@ body {
 }
 
 #main.single #viewer {
-  /* width: 60%;
-  margin-left: 20%; */
+  /* Custom adjustments for the single view if needed */
 }
 
 #panels {
@@ -185,13 +165,10 @@ body {
   width: 100%;
   padding: 13px 0;
   height: 14px;
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 #opener {
-  /* padding: 10px 10px; */
   float: left;
 }
 
@@ -201,10 +178,17 @@ body {
   max-width: 80%;
 }
 
-#title-controls { float: right; }
+#title-controls {
+  float: right;
+}
 
-#panels a::before { visibility: visible; }
-#panels a:hover { color: #aaa; }
+#panels a::before {
+  visibility: visible;
+}
+
+#panels a:hover {
+  color: #aaa;
+}
 
 .list_item.currentChapter > a,
 .list_item a:hover {
@@ -238,8 +222,13 @@ body {
   margin-top: -1px;
 }
 
-input::-webkit-input-placeholder { color: #454545; }
-input:-moz-placeholder { color: #454545; }
+input::-webkit-input-placeholder {
+  color: #454545;
+}
+
+input:-moz-placeholder {
+  color: #454545;
+}
 
 #divider {
   position: absolute;
@@ -275,8 +264,6 @@ input:-moz-placeholder { color: #454545; }
   width: 25%;
   height: 100%;
   visibility: hidden;
-  -webkit-transition: visibility 0s ease 0.5s;
-  -moz-transition: visibility 0s ease 0.5s;
   transition: visibility 0s ease 0.5s;
 }
 
@@ -284,8 +271,6 @@ input:-moz-placeholder { color: #454545; }
 #sidebar.open #bookmarksView {
   overflow-y: auto;
   visibility: visible;
-  -webkit-transition: visibility 0s ease 0s;
-  -moz-transition: visibility 0s ease 0s;
   transition: visibility 0s ease 0s;
 }
 
@@ -359,7 +344,6 @@ input:-moz-placeholder { color: #454545; }
   font-size: 0.8em;
 }
 
-/* #tocView li.openChapter > a, */
 .list_item a:hover {
   color: #e2e2e2;
 }
@@ -372,9 +356,6 @@ input:-moz-placeholder { color: #454545; }
   display: inline-block;
   width: 14px;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -423,6 +404,10 @@ input:-moz-placeholder { color: #454545; }
   color: #aaa;
 }
 
+#notes {
+  padding: 0 0 0 34px;
+}
+
 #notes li a {
   color: #fff;
   display: inline-block;
@@ -438,11 +423,7 @@ input:-moz-placeholder { color: #454545; }
   overflow-y: scroll;
 }
 
-#notes {
-  padding: 0 0 0 34px;
-}
-
-#notes li a:hover {
+#notes li:hover a {
   text-decoration: underline;
 }
 
@@ -500,13 +481,29 @@ input:-moz-placeholder { color: #454545; }
   list-style-type: none;
 }
 
-#settingsPanel .xsmall { font-size: x-small; }
-#settingsPanel .small { font-size: small; }
-#settingsPanel .medium { font-size: medium; }
-#settingsPanel .large { font-size: large; }
-#settingsPanel .xlarge { font-size: x-large; }
+#settingsPanel .xsmall {
+  font-size: x-small;
+}
 
-.highlight { background-color: yellow; }
+#settingsPanel .small {
+  font-size: small;
+}
+
+#settingsPanel .medium {
+  font-size: medium;
+}
+
+#settingsPanel .large {
+  font-size: large;
+}
+
+#settingsPanel .xlarge {
+  font-size: x-large;
+}
+
+.highlight {
+  background-color: yellow;
+}
 
 .modal {
   position: fixed;
@@ -530,8 +527,6 @@ input:-moz-placeholder { color: #454545; }
   z-index: 1000;
   opacity: 0;
   background: rgba(255, 255, 255, 0.8);
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
   transition: all 0.3s;
 }
 
@@ -599,20 +594,12 @@ input:-moz-placeholder { color: #454545; }
 
 /* Effect 1: Fade in and scale up */
 .md-effect-1 .md-content {
-  -webkit-transform: scale(0.7);
-  -moz-transform: scale(0.7);
-  -ms-transform: scale(0.7);
   transform: scale(0.7);
   opacity: 0;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
   transition: all 0.3s;
 }
 
 .md-show.md-effect-1 .md-content {
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
   transform: scale(1);
   opacity: 1;
 }
@@ -624,6 +611,8 @@ input:-moz-placeholder { color: #454545; }
   font-size: 24px;
   padding: 4px;
 }
+
+/* Media Queries */
 
 @media only screen and (max-width: 1040px) and (orientation: portrait) {
   #viewer {
@@ -674,18 +663,12 @@ input:-moz-placeholder { color: #454545; }
   }
 
   #main {
-    -webkit-transform: translate(0, 0);
-    -moz-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    -webkit-transition: -webkit-transform 0.3s;
-    -moz-transition: -moz-transform 0.3s;
-    transition: -moz-transform 0.3s;
+    transform: translate(0, 0);
+    transition: transform 0.3s;
   }
 
   #main.closed {
-    -webkit-transform: translate(260px, 0);
-    -moz-transform: translate(260px, 0);
-    -ms-transform: translate(260px, 0);
+    transform: translate(260px, 0);
   }
 
   #metainfo {
@@ -713,11 +696,7 @@ input:-moz-placeholder { color: #454545; }
   }
 }
 
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (orientation: landscape)
-  /* and (-webkit-min-device-pixel-ratio: 2)*/ {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
   #viewer {
     width: 80%;
     margin-left: 10%;
