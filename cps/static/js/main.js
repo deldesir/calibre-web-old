@@ -200,8 +200,8 @@ $(document).ready(function() {
     // Handle Enter key press event in the input field
     $(document).on('keydown', function(event) {
         // Check if the pressed key is Enter (key code 13)
-        if (event.which === 13) {
-                initiateYoutubeDownload();
+        if (event.which === 13 && $("#youtubeDownloadModal").is(":visible")) {
+            initiateYoutubeDownload();
         }
     });
 
