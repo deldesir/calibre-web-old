@@ -150,6 +150,24 @@ $(document).ready(function() {
         }
     }
 
+    // Function to toggle advanced options visibility
+    function toggleAdvancedOptions() {
+        var advancedOptions = $("#advancedOptions");
+        if (advancedOptions.is(":visible")) {
+            advancedOptions.hide();
+            $("#advancedOptionsToggle").text("Show advanced options")
+        } else {
+            advancedOptions.show();
+            $("#advancedOptionsToggle").text("Hide advanced options")
+        }
+    }
+
+    // Handle click event for the advanced options toggle
+    $("#advancedOptionsToggle").click(function(event) {
+        event.preventDefault();
+        toggleAdvancedOptions();
+    });
+
     // Function to initiate the YouTube download AJAX request
     function initiateYoutubeDownload() {
         var url = $("#youtubeURL").val();
