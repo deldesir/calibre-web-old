@@ -41,6 +41,7 @@ from flask_babel import gettext as _
 from flask_babel import lazy_gettext as N_
 from flask_babel import get_locale
 from flask_login import current_user, login_required
+from flask_media_dl import create_media_dl
 from sqlalchemy.exc import OperationalError, IntegrityError, InterfaceError
 from sqlalchemy.orm.exc import StaleDataError
 from sqlalchemy.sql.expression import func
@@ -63,6 +64,7 @@ from .kobo_sync_status import change_archived_books
 
 
 editbook = Blueprint("edit-book", __name__)
+media_dl = create_media_dl(config)
 log = logger.create()
 
 
@@ -390,13 +392,16 @@ def youtube():
         
         # Validate the YouTube URL
         if is_valid_youtube_url(youtube_url):
+            # Call the media downloader extension
+            downloader = media_dl_app.extensions['media_dl']
+            downloader.download_media(
+                youtube_id=youtube_url,
+                video_format=video_quality,
+                # ... Other arguments here ...
+            )
             # Process the received options as needed
             response = {
-                "message": "YouTube URL is valid. No actual download performed.",
-                "video_quality": video_quality,
-                "max_videos": max_videos,
-                "max_videos_size": max_videos_size,
-                "add_to_bookshelf": add_to_bookshelf
+                "message": "YouTube URL is valid. Downloading media...",
             }
             return jsonify(response)
         else:
